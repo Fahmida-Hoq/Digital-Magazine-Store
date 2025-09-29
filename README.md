@@ -1,2 +1,1 @@
-# Digital-Magazine-Store
-My first work </br> Author-Fahmida Hoque
+# new repo

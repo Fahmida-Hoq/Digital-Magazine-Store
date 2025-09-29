@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Magazine>
+@{
+    
+}
+
+<h2>Magazines</h2>
+
+<a asp-action="AddMagazine" asp-controller="Magazine" class="btn btn-primary">Add More</a>
+
+@if (Model?.Count() > 0)
+{
+    <table class="table table-striped my-2">
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var magazine in Model)
+        {
+            <tr>
+                <td>
+                    @if (string.IsNullOrWhiteSpace(magazine.Image))
+                    {
+                        <img src="/Images/no-cover.jpg" style="width:80px;height:100px" alt="magazine image" />
+                    }
+                    else
+                    {
+                        <img src="/images/@magazine.Image" style="width:80px;height:100px" alt="magazine image" />
+                    }
+                </td>
+                <td>@magazine.Title</td>
+                <td>@magazine.AuthorName</td>
+                <td>@magazine.Category.CategoryType</td>
+                <td>@magazine.Price</td>
+                <td>
+                    <a asp-action="UpdateMagazine" asp-controller="Magazine" asp-route-id="@magazine.Id" class="btn btn-success">Edit</a>
+                    <a asp-action="DeleteMagazine" asp-controller="Magazine" asp-route-id="@magazine.Id" class="btn btn-danger" onclick="return window.confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>No records</h3>
+}

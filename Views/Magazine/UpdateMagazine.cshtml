@@ -1,0 +1,51 @@
+﻿@model MagazineDTO
+@{
+    <partial name="_Notifications" />
+}
+<div style="width:50%">
+    <h2> Update Magazine </h2>
+    <a asp-action="Index" asp-controller="Magazine" class="btn btn-primary">Back</a>
+    <form asp-action="UpdateMagazine" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CoverImage" />
+
+        <div class="my-2">
+            <label>Title*</label>
+            <input type="text" class="form-control" asp-for="Title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Author*</label>
+            <input type="text" class="form-control" asp-for="AuthorName" />
+            <span asp-validation-for="AuthorName" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Category*</label>
+            <select class="form-control" asp-for="CategoryId" asp-items="Model.CategoryList">
+                <option value="">Select Category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Price*</label>
+            <input type="number" class="form-control" asp-for="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Image</label>
+            @if (!string.IsNullOrEmpty(Model.CoverImage))
+            {
+                <img src="/images/@Model.CoverImage" style="width:100px;height:80px" />
+            }
+            <input type="file" class="form-control" asp-for="CoverImageFile" />
+        </div>
+
+        <div class="my-2">
+            <button type="submit" class="btn btn-info">Update</button>
+        </div>
+    </form>
+</div>
