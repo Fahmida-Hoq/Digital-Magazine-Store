@@ -1,0 +1,33 @@
+wwwroot\css\bootstrap.min.css
+wwwroot\css\DigitalMagazineStore.styles.css
+wwwroot\favicon.ico
+wwwroot\Images\0302e6bb0793d5097da000f4dded95fe.jpg
+wwwroot\Images\bazaar.jpg
+wwwroot\Images\beauty.jpg
+wwwroot\Images\conde.jpg
+wwwroot\Images\entrepreneur.jpg
+wwwroot\Images\fast_company.jpg
+wwwroot\Images\filmfare.jpg
+wwwroot\Images\fitnes.jpg
+wwwroot\Images\forbes.jpg
+wwwroot\Images\fortune.jpg
+wwwroot\Images\golf.jpg
+wwwroot\Images\images.jpeg
+wwwroot\Images\new_style.jpg
+wwwroot\Images\no-cover.jpg
+wwwroot\Images\prevention.jpg
+wwwroot\Images\runner.jpg
+wwwroot\Images\running.jpg
+wwwroot\Images\self.jpg
+wwwroot\Images\sidetracked.jpg
+wwwroot\Images\sports illustrated.jpg
+wwwroot\Images\tatler.jpg
+wwwroot\Images\the_economist.jpg
+wwwroot\Images\travel.jpg
+wwwroot\Images\vouge.jpg
+wwwroot\Images\wanderlust.jpg
+wwwroot\Images\wired.jpg
+wwwroot\Images\womens-health.jpg
+G:\new repo\Magazine store.1\DigitalMagazineStore\Digital-Magazine-Store\wwwroot\css\bootstrap.min.css
+G:\new repo\Magazine store.1\DigitalMagazineStore\Digital-Magazine-Store\wwwroot\css\DigitalMagazineStore.styles.css
+G:\new repo\Magazine store.1\DigitalMagazineStore\Digital-Magazine-Store\wwwroot\favicon.ico

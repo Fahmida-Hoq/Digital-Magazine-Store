@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|g:\\new repo\\magazine store.1\\digitalmagazinestore\\digital-magazine-store\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|solutionrelative:views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|g:\\new repo\\magazine store.1\\digitalmagazinestore\\digital-magazine-store\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|g:\\new repo\\magazine store.1\\digitalmagazinestore\\digital-magazine-store\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|g:\\new repo\\magazine store.1\\digitalmagazinestore\\digital-magazine-store\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|solutionrelative:views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|g:\\new repo\\magazine store.1\\digitalmagazinestore\\digital-magazine-store\\models\\magazine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FA4D435-3DE0-4488-91A4-F98402E450E6}|DigitalMagazineStore.csproj|solutionrelative:models\\magazine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-13T06:08:04.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
+              "ToolTip": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-13T06:04:22.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAWwBMAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-13T05:55:43.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-13T05:48:58.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Magazine.cs",
+              "DocumentMoniker": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Models\\Magazine.cs",
+              "RelativeDocumentMoniker": "Models\\Magazine.cs",
+              "ToolTip": "G:\\new repo\\Magazine store.1\\DigitalMagazineStore\\Digital-Magazine-Store\\Models\\Magazine.cs",
+              "RelativeToolTip": "Models\\Magazine.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T06:15:52.322Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

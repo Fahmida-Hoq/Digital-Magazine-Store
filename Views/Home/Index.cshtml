@@ -1,94 +1,124 @@
 ﻿@model MagazineDisplay
-
 @{
-
+    ViewData["Title"] = "Home - Digital Magazine Store";
 }
-<div class="my-2">
-    <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
 
+<!-- Hero / Search Section -->
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-primary">Explore Our Magazines</h1>
+        <p class="text-muted">Find your favorite magazines by category or title.</p>
+    </div>
 
-        <div class="col-12">
-            <label class="visually-hidden" for="categoryID">Category</label>
-            <select class="form-select" id="categoryID" name="categoryID">
+    <form asp-action="Index" class="row justify-content-center g-3 align-items-center bg-light p-4 rounded-4 shadow-sm">
 
-                <option selected>Category </option>
+        <div class="col-md-4">
+            <select class="form-select form-select-lg" id="categoryID" name="categoryID">
+                <option selected>All Categories</option>
                 @foreach (var category in Model.Categories)
                 {
                     <option selected="@(category.Id == Model.CategoryID)" value="@category.Id">@category.CategoryType</option>
                 }
-
-
             </select>
         </div>
 
-        <div class="col-12">
-            <label class="visually-hidden" for="sterm">Search by Title</label>
-            <div class="input-group">
-                <div class="input-group-text"></div>
-                <input type="text" class="form-control" value="@Model.STerm " id="sterm" name="sterm" placeholder="Search by Title">
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control border-start-0" value="@Model.STerm" id="sterm" name="sterm" placeholder="Search by Title">
             </div>
         </div>
 
-
-
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Search</button>
-            <a href="/Home/" type="reset" class="btn btn-dark">Reset</a>
-
+        <div class="col-md-3 text-center">
+            <button type="submit" class="btn btn-gradient-primary btn-lg me-2"><i class="bi bi-funnel"></i> Search</button>
+            <a href="/Home/" class="btn btn-outline-dark btn-lg"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
         </div>
     </form>
 </div>
 
-<div class="w-100 mt-4 d-flex flex-wrap">
-    @foreach (var magazine in Model.Magazines)
-    {
+<!-- Product Grid -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        @foreach (var magazine in Model.Magazines)
+        {
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 shadow-sm hover-card border-0 rounded-4 overflow-hidden">
+                    @if (string.IsNullOrEmpty(magazine.Image))
+                    {
+                        <img src="/Images/no-cover.jpg" class="card-img-top" style="height: 250px; object-fit: cover;" alt="No Cover">
+                    }
+                    else
+                    {
+                        <img src="/Images/@magazine.Image" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@magazine.Title">
+                    }
 
-        <div class="card mx-3 mb-4" style="width: 11rem;">
-            @if (string.IsNullOrEmpty(magazine.Image))
-            {
-                <img style="width:100%;height:300px" src="/Images/no-cover.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">@magazine.Title</h5>
+                        <p class="card-text mb-3 text-muted small">
+                            <b>Category:</b> @magazine.CategoryType<br />
+                            <b>Author:</b> @magazine.AuthorName<br />
+                            <b>Price:</b> $@magazine.Price
+                        </p>
 
-            }
-            else
-            {
-                <img style="width:100%;height:180px" src="/Images/@magazine.Image" class="card-img-top" alt="...">
-            }
-
-
-            <div class="card-body">
-                <h5 class="card-title"> <b>@magazine.Title</b></h5>
-                <p class="card-text">
-                    <b>Category: </b>@magazine.CategoryType<br />
-                    <b>Author: </b>@magazine.AuthorName<br />
-                    <b>Price: </b>@magazine.Price<br/>
-                    @* <b> @magazine.Quantity</b> *@
-                </p>
-                @if (magazine.Quantity>0)
-                {
-                    <button type="button" onclick="add(@magazine.Id)" class="btn btn-primary">Add to cart</button>
-                }
-                else
-                {
-                    <span style="border: 1px solid;padding: 5px 8px;color: red;border-radius: 5px;">Out of stock</span>
-                }
-
+                        @if (magazine.Quantity > 0)
+                        {
+                            <button type="button" onclick="add(@magazine.Id)" class="btn btn-gradient-primary w-100">
+                                <i class="bi bi-cart-plus"></i> Add to Cart
+                            </button>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger w-100 py-2">Out of Stock</span>
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
+        }
+    </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
     }
 
-</div>
+    .hover-card {
+        transition: all 0.3s ease-in-out;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+    .btn-gradient-primary {
+        background: linear-gradient(90deg, #007bff 0%, #00b4d8 100%);
+        color: white;
+        border: none;
+    }
+
+        .btn-gradient-primary:hover {
+            background: linear-gradient(90deg, #0069d9 0%, #0096c7 100%);
+        }
+
+    h1, h5 {
+        letter-spacing: 0.5px;
+    }
+</style>
 
 @section Scripts {
     <script>
         async function add(magazineId) {
-             var usernameEl = document.getElementById("username");
-        if(usernameEl==null){
-            window.location.href = "/Identity/Account/Login";
-          //var username=usernameEl.innerText;
-          //  if(username.length<1){
-          //      window.location.href="/Identity/Account/Login";
-          //  }
-        }
+            var usernameEl = document.getElementById("username");
+            if (usernameEl == null) {
+                window.location.href = "/Identity/Account/Login";
+                return;
+            }
+
             try {
                 var response = await fetch(`/Cart/AddItem?magazineId=${magazineId}`);
                 if (response.status == 200) {
@@ -97,8 +127,7 @@
                     cartCountEl.innerHTML = result;
                     window.location.href = "#cartCount";
                 }
-            }
-            catch (err) {
+            } catch (err) {
                 console.log(err);
             }
         }
