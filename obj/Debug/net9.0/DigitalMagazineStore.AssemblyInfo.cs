@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DigitalMagazineStore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b00875e1790f8c838884359f7c200b7507f015a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bee4ca349269aeb756de2050caf9e00c72284768")]
 [assembly: System.Reflection.AssemblyProductAttribute("DigitalMagazineStore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DigitalMagazineStore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

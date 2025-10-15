@@ -1,73 +1,114 @@
 ﻿@model IEnumerable<Order>
 @{
-    
-	
-    ViewData["Title"] = "AllOrders";
+    ViewData["Title"] = "All Orders";
 }
 
-<div style="width:100%" class="mt-2">
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold text-primary mb-0">
+            <i class="bi bi-bag-check-fill"></i> All Orders
+        </h3>
+        <span class="badge bg-secondary fs-6">
+            Total Orders: @Model.Count()
+        </span>
+    </div>
 
-    <h4> Orders</h4>
-    @if (Model != null && Model.Count() > 0)
+    @if (Model != null && Model.Any())
     {
-        <table class="table table-striped">
-            <tr>
-                <th>OrderDate</th>
-				<th>Name</th>
-				<th>MobileNumber</th>
-                <th>Email</th>                
-                <th>Address</th>
-                <th>Payment Method</th>
-                <th>Payment Status</th>
-                <th>OrderStatus</th>
-                <th>Actions</th>
+        <div class="table-responsive shadow-sm rounded-3">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th>Order Date</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Payment Method</th>
+                        <th>Payment Status</th>
+                        <th>Order Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-center">
+                    @foreach (var order in Model)
+                    {
+                        string paymentStatus = order.PaymentMethod == "COD"
+                        ? "Not Paid"
+                        : (order.IsPaid ? "Paid" : "Not Paid");
+
+                        string orderStatus = order.OrderStatus?.StatusName ?? "Pending";
+
+                        string paymentBadge = paymentStatus == "Paid" ? "bg-success" : "bg-danger";
+                        string orderBadge = orderStatus.ToLower() switch
+                        {
+                            "pending" => "bg-warning text-dark",
+                            "processing" => "bg-info text-dark",
+                            "completed" => "bg-success",
+                            "cancelled" => "bg-danger",
+                            _ => "bg-secondary"
+                        };
+
+                        <tr>
+                            <td>@order.CreatedDate.ToString("dd-MM-yyyy")</td>
+                            <td>@order.Name</td>
+                            <td>@order.MobileNumber</td>
+                            <td>@order.Email</td>
+                            <td>@order.Address</td>
+                            <td>@order.PaymentMethod</td>
+
+                            <td>
+                                <span class="badge @paymentBadge px-3 py-2">
+                                    <i class="bi bi-cash-stack"></i> @paymentStatus
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="badge @orderBadge px-3 py-2">
+                                    <i class="bi bi-truck"></i> @orderStatus
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#model-@order.Id">
+                                        <i class="bi bi-eye"></i> Details
+                                    </button>
+
+                                    <a asp-action="UpdateOrderStatus"
+                                       asp-route-orderId="@order.Id"
+                                       class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-pencil-square"></i> Update
+                                    </a>
+
+                                    <a asp-action="TogglePaymentStatus"
+                                       asp-route-orderId="@order.Id"
+                                       class="btn btn-sm btn-outline-success">
+                                        <i class="bi bi-arrow-repeat"></i> Payment
+                                    </a>
+                                </div>
+
+                                <!-- Order Detail Modal -->
+                                @await Html.PartialAsync("/Views/AdminOperations/_OrderDetailModel.cshtml",
+                                new OrderDetailModelDTO
+                                {
+                                    DivId = order.Id.ToString(),
+                                    OrderDetail = order.OrderDetail
+                                })
+                    </td>
                 </tr>
-            @foreach (var order in Model)
-            {
-                <tr>
-                    <td>@order.CreatedDate.ToString("dd-MM-yyyy")</td>
-                    <td>@order.Name</td>
-                    <td>@order.MobileNumber</td>
-                    <td>@order.Email</td>
-                    <td>@order.Address</td>
-                    <td>@order.PaymentMethod</td>
-                    <td>
-                        @(
-                                        order.PaymentMethod == "COD"
-                                        ? "Not Paid"
-                                        : (order.IsPaid ? " Not Paid" : "Paid")
-                                        )
-                </td>
-
-                <td>@(order.OrderStatus?.StatusName ?? "Pending")</td>
-                <td>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#model-@order.Id" class="btn btn-primary">
-                            Order-Detail
-                        </button>
-
-                        <a asp-action="UpdateOrderStatus" asp-route-orderId="@order.Id" class="btn btn-info">
-                            Change Order Status
-                        </a>
-
-                    <a asp-action="TogglePaymentStatus" asp-route-orderId="@order.Id" class="btn btn-info">Toggle Payment Status</a>
-             
-                    @*  appending model div here *@
-                    @await Html.PartialAsync("/Views/AdminOperations/_OrderDetailModel.cshtml" ,
-                    new OrderDetailModelDTO{DivId=order.Id.ToString(),OrderDetail=order.OrderDetail})
-
-                </td>
-            </tr>
-                }
-
-                
-
-
-            
+                                }
+                </tbody>
             </table>
+        </div>
     }
-        else
-        {
-        <h5>No orders</h5>
-        }
+    else
+    {
+        <div class="alert alert-info mt-4 text-center" role="alert">
+            <i class="bi bi-info-circle"></i> No orders available.
+        </div>
+    }
 </div>
-

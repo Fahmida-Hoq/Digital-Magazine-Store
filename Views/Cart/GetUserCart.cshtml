@@ -1,77 +1,254 @@
-﻿@model Cart 
+﻿@model Cart
 @{
-    
-    ViewData["Title"] = "GetUserCart";
+    ViewData["Title"] = "My Cart";
 }
 
-<div style="width:90%;margin:auto" class="mt-2">
+<style>
+   
+    :root {
+        --bg-light: #f7f6f3;
+        --text-light: #2c2c2c;
+        --card-light: #ffffff;
+        --bg-dark: #1c1c1c;
+        --text-dark: #eaeaea;
+        --card-dark: #2a2a2a;
+        --primary-color: #e63946;
+        --accent-color: #2b6cb0;
+    }
+
+    body {
+        font-family: 'Playfair Display', serif;
+        background-color: var(--bg-light);
+        color: var(--text-light);
+        transition: background-color 0.4s, color 0.4s;
+    }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+    h2, h3 {
+        font-family: 'Merriweather', serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .cart-container {
+        width: 90%;
+        margin: 40px auto;
+        background: var(--card-light);
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        transition: background-color 0.4s;
+    }
+
+    body.dark-mode .cart-container {
+        background: var(--card-dark);
+        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+    }
+
+    table {
+        font-family: 'Poppins', sans-serif;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        width: 100%;
+    }
+
+    th {
+        background-color: var(--accent-color);
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    td {
+        vertical-align: middle;
+        background-color: #fafafa;
+        transition: background-color 0.3s;
+    }
+
+    tr:hover td {
+        background-color: #f0f0f0;
+    }
+
+    body.dark-mode td {
+        background-color: #333;
+    }
+
+    body.dark-mode tr:hover td {
+        background-color: #444;
+    }
+
+    .btn {
+        font-family: 'Poppins', sans-serif;
+        border-radius: 10px;
+        padding: 6px 14px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        transition: 0.3s ease;
+    }
+
+    .btn-info {
+        background-color: var(--accent-color);
+        color: #fff;
+        border: none;
+    }
+
+        .btn-info:hover {
+            background-color: #1e4e8c;
+        }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #c92d3f;
+        }
+
+    .btn-outline-dark {
+        border: 1px solid #444;
+        color: #444;
+    }
+
+    body.dark-mode .btn-outline-dark {
+        border-color: #ccc;
+        color: #ccc;
+    }
+
+    .btn-outline-dark:hover {
+        background-color: #444;
+        color: #fff;
+    }
+
+    .empty-cart {
+        font-family: 'Merriweather', serif;
+        color: #c92d3f;
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .total-section {
+        margin-top: 20px;
+        text-align: right;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .checkout-btns {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    /* Dark mode toggle */
+    .theme-toggle {
+        position: absolute;
+        top: 25px;
+        right: 50px;
+        cursor: pointer;
+        font-size: 18px;
+        font-family: 'Poppins', sans-serif;
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+
+        .theme-toggle:hover {
+            background: #c92d3f;
+        }
+
+</style>
+
+<button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+
+<div class="cart-container position-relative">
     @if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
     {
-        <h3> My Cart</h3>
-       
-        <table class="table table-striped">
-            <tr>
-                <th>Magazine</th>
-                <th>Image</th>
-                <th>Category</th>
-                <th>UnitPrice($)</th>              
-                <th>Total Price</th>
-                <th>Action</th>
-            </tr>
-            @foreach (var item in Model.CartDetails)
-            {
-                <tr>
-                    <td>@item.Magazine.Title</td>
-                    <td>
-                        @if (string.IsNullOrEmpty(item.Magazine.Image))
-                        {
-                            <img src="/images/no-cover.jpg" style="width:80px;height:100px" />
-                        }
-                        else
-                        {
-                            <img src="/images/@item.Magazine.Image" style="width:80px;height:100px" />
+        <h3 class="mb-4">🛒 My Magazine Cart</h3>
 
-                        }
-                    </td>
-                    <td>@item.Magazine.Category.CategoryType</td>
-                    <td>@item.Magazine.Price X @item.Quantity</td>
-                    <td>@(item.Magazine.Price * item.Quantity)</td>
-                    <td>
-                        @* Increase Quantity button should be invisible if not enough stock*@
-                        @if (item.Quantity < item.Magazine.Stock.Quantity)
-                        {
-                            <a class="btn btn-info" href="/Cart/AddItem?bookId=@item.MagazineId&&redirect=1">+</a>
-                        }
-                        else
-                        {
-                            <span style="border: 1px solid;padding: 8px 8px;color: red;border-radius: 5px;margin-right:4px">Out of stock </span>
-                        }
-                        @* Decrement button *@
-                        <a class="btn btn-info" href="/cart/removeitem?magazineid=@item.MagazineId">-</a>
-                    </td>
+        <table class="table table-borderless align-middle">
+            <thead>
+                <tr>
+                    <th>Magazine</th>
+                    <th>Cover</th>
+                    <th>Category</th>
+                    <th>Price (USD)</th>
+                    <th>Total</th>
+                    <th>Actions</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartDetails)
+                {
+                    <tr>
+                        <td><strong>@item.Magazine.Title</strong></td>
+                        <td>
+                            <img src="@(string.IsNullOrEmpty(item.Magazine.Image) ? "/images/no-cover.jpg" : $"/images/{item.Magazine.Image}")"
+                                 style="width: 90px; height: 120px; border-radius: 10px; object-fit: cover;" />
+                        </td>
+                        <td>@item.Magazine.Category.CategoryType</td>
+                        <td>$@item.Magazine.Price × @item.Quantity</td>
+                        <td><strong>$@(item.Magazine.Price* item.Quantity)</strong></td>
+                        <td>
+                            @if (item.Quantity < item.Magazine.Stock.Quantity)
+                            {
+                                <a class="btn btn-info me-2" href="/Cart/AddItem?magazineId=@item.MagazineId&&redirect=1">+</a>
+                            }
+                            else
+                            {
+                                <span style="border: 1px solid #c92d3f; padding: 6px 10px; color: #c92d3f; border-radius: 8px;">Out of Stock</span>
+                            }
+                            <a class="btn btn-info" href="/Cart/RemoveItem?magazineId=@item.MagazineId">−</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
-       
-        <div class="my-2">
-            <h5>Total($): </h5>
-            @(Model.CartDetails.Select(item => item.Magazine.Price * item.Quantity).Sum())
-            </div>
-        <div class="my-2">
-            <a class="btn btn-primary" href="/Cart/Checkout">Checkout</a>
-            </div>
+
+        <div class="total-section">
+            Total: <span style="color: var(--primary-color);">$@(Model.CartDetails.Select(item => item.Magazine.Price * item.Quantity).Sum())</span>
+        </div>
+
+        <div class="checkout-btns">
+            <a class="btn btn-outline-dark" href="/Magazine/Index">← Continue Shopping</a>
+            <a class="btn btn-primary btn-lg" href="/Cart/Checkout">Proceed to Checkout →</a>
+        </div>
     }
     else
     {
-        <h5 style="color:orangered; font-size:32px; font-weight:bold;
-        display:flex; justify-content:center; align-items:center;
-        height:100vh; margin:0;">
-            Cart is Empty
-        </h5>
-
-
-
+        <div class="empty-cart">
+            📰 Your Cart is Empty — Start Exploring New Magazines!
+        </div>
     }
 </div>
 
+<script>
+    const toggleBtn = document.getElementById("themeToggle");
+    const body = document.body;
 
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "☀️ Light Mode";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        const isDark = body.classList.contains("dark-mode");
+        toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+</script>

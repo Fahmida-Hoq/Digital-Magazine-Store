@@ -3,49 +3,224 @@
     ViewData["Title"] = "Checkout";
 }
 
-<h2>Checkout</h2>
-<form asp-action="Checkout">
-    <div class="py-2">
-        <label asp-for="Name">Name*</label>
-        <input type="text" class="form-control" asp-for="Name" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+<style>
+    
+    :root {
+        --bg-light: #f8f6f3;
+        --text-light: #2c2c2c;
+        --card-light: #ffffff;
+        --bg-dark: #1c1c1c;
+        --text-dark: #eaeaea;
+        --card-dark: #2a2a2a;
+        --primary-color: #e63946;
+        --accent-color: #2b6cb0;
+        --focus-shadow: 0 0 8px rgba(230, 57, 70, 0.5);
+    }
 
-    <div class="py-2">
-        <label asp-for="Email">Email*</label>
-        <input type="text" class="form-control" asp-for="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--bg-light);
+        color: var(--text-light);
+        transition: background-color 0.4s, color 0.4s;
+    }
 
-    </div>
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
 
-    <div class="py-2">
-        <label asp-for="MobileNumber">MobileNumber*</label>
-        <input type="text" class="form-control" asp-for="MobileNumber" />
-        <span asp-validation-for="MobileNumber" class="text-danger"></span>
-    </div>
+    .checkout-container {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 40px;
+        background-color: var(--card-light);
+        border-radius: 16px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.4s, box-shadow 0.4s;
+        position: relative;
+    }
 
+    body.dark-mode .checkout-container {
+        background-color: var(--card-dark);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.05);
+    }
 
-    <div class="py-2">
-        <label asp-for="Address">Address*</label>
-        <textarea class="form-control" asp-for="Address" rows="5"> </textarea>
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
+    h2 {
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 25px;
+    }
 
-    <div class="py-2">
-        <span class="mr-2">COD*</span>
-        <select asp-for="PaymentMethod" class="form-control">
-            <option value="">Select Payment Method</option>
-            @foreach (var method in Enum.GetValues(typeof(DigitalMagazineStore.Constants.PaymentMethods)))
-            {
-                <option value="@method.ToString()">@method.ToString()</option>
+    label {
+        font-weight: 500;
+        margin-bottom: 6px;
+        display: block;
+    }
 
+    input, textarea, select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fafafa;
+        font-size: 15px;
+        transition: all 0.3s;
+    }
+
+    body.dark-mode input,
+    body.dark-mode textarea,
+    body.dark-mode select {
+        background-color: #333;
+        border-color: #555;
+        color: #fff;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        box-shadow: var(--focus-shadow);
+        border-color: var(--primary-color);
+        background-color: #fff;
+    }
+
+    body.dark-mode input:focus,
+    body.dark-mode textarea:focus,
+    body.dark-mode select:focus {
+        background-color: #2c2c2c;
+    }
+
+    .btn {
+        font-family: 'Poppins', sans-serif;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-info {
+        background-color: var(--accent-color);
+        color: #fff;
+    }
+
+        .btn-info:hover {
+            background-color: #1e4e8c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(43, 108, 176, 0.3);
+        }
+
+    .payment-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 8px;
+        align-items: center;
+    }
+
+        .payment-icons img {
+            height: 28px;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+        }
+
+            .payment-icons img:hover {
+                transform: scale(1.1);
+                opacity: 1;
             }
-        </select>
-        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
-    </div>
 
-    <div class="py-2">
-        <button type="submit" c class="btn btn-info">Next</button>
+    .theme-toggle {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
 
-    </div>
-</form>
+        .theme-toggle:hover {
+            background: #c92d3f;
+        }
+
+    .text-danger {
+        font-size: 14px;
+    }
+
+</style>
+
+<div class="checkout-container">
+    <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+
+    <h2>Secure Checkout</h2>
+    <form asp-action="Checkout" method="post">
+        <div class="py-2">
+            <label asp-for="Name">Full Name*</label>
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="py-2">
+            <label asp-for="Email">Email Address*</label>
+            <input type="email" asp-for="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="py-2">
+            <label asp-for="MobileNumber">Mobile Number*</label>
+            <input type="text" asp-for="MobileNumber" />
+            <span asp-validation-for="MobileNumber" class="text-danger"></span>
+        </div>
+
+        <div class="py-2">
+            <label asp-for="Address">Delivery Address*</label>
+            <textarea asp-for="Address" rows="4"></textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="py-2">
+            <label asp-for="PaymentMethod">Payment Method*</label>
+            <select asp-for="PaymentMethod">
+                <option value="">Select Payment Method</option>
+                @foreach (var method in Enum.GetValues(typeof(DigitalMagazineStore.Constants.PaymentMethods)))
+                {
+                    <option value="@method.ToString()">@method.ToString()</option>
+                }
+            </select>
+            <div class="payment-icons">
+                <img src="/images/icons/visa.png" alt="Visa" />
+                <img src="/images/icons/mastercard.png" alt="MasterCard" />
+                <img src="/images/icons/paypal.png" alt="PayPal" />
+                <img src="/images/icons/cod.png" alt="Cash on Delivery" />
+            </div>
+            <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+        </div>
+
+        <div class="py-3 text-center">
+            <button type="submit" class="btn btn-info w-100">Proceed to Place Order →</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const toggleBtn = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "☀️ Light Mode";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        const isDark = body.classList.contains("dark-mode");
+        toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+</script>

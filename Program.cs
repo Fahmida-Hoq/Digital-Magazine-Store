@@ -23,7 +23,8 @@ namespace DigitalMagazineStore
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpContextAccessor();
+           
             builder.Services.AddTransient<IHomeRepository,HomeRepository>();
             builder.Services.AddTransient<ICartRepository, CartRepository>();
             builder.Services.AddTransient<IUserOrderRepository, UserOrderRepository>();
@@ -33,7 +34,7 @@ namespace DigitalMagazineStore
             builder.Services.AddScoped<IMagazineRepository, MagazineRepository>();
 
 
-
+            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
             //using (var scope=app.Services.CreateScope())
@@ -57,7 +58,7 @@ namespace DigitalMagazineStore
 
             app.UseHttpsRedirection();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapStaticAssets();
